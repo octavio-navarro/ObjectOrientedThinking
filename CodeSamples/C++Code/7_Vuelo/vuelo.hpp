@@ -1,4 +1,6 @@
 #include <string>
+#include <cstdlib>
+
 #include "date.hpp"
 
 using namespace std;
@@ -11,29 +13,34 @@ class Vuelo
         // int numeroPasajeros;
     
     public:
-        string id, origen, destino, tipoVuelo;
+        string id, origen, tipoVuelo;
+        int destino;
         Date horaSalida, horaLlegada;
         int numeroPasajeros;
+        int mes;
 
         Vuelo()
         {
             id = "";
             origen = "";
-            destino = "";
+            destino = rand() % 25;
             tipoVuelo = "";
             horaSalida = Date();
             horaLlegada = Date();
+            mes = rand() % 12;
         }
 
         Vuelo(string _id, string _origen, string _destino, string _tipoVuelo, Date _horaSalida, Date _horaLlegada)
         {
             id = _id;
             origen = _origen;
-            destino = _destino;
+            destino = rand()%25;
             tipoVuelo = _tipoVuelo;
             horaSalida = _horaSalida;
             horaLlegada = _horaLlegada;
             numeroPasajeros = 0;
+            
+            mes = rand() % 12;
         }
 
         Date getHorarioSalida() { return horaSalida; }
@@ -42,6 +49,14 @@ class Vuelo
         void setHorarioSalida(Date nuevoHorario)
         {
             horaSalida = nuevoHorario;
+        }
+
+        void setDestino(int nuevoDestino)
+        {
+            if(nuevoDestino < 25)
+                destino = nuevoDestino;
+            else
+                destino = 0;
         }
 
         void setHorarioLlegada(Date nuevoHorario)
